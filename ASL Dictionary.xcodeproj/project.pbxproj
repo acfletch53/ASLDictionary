@@ -1,0 +1,86 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		A6A29CDF1CA5A7FD00B37598 /* OtherResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OtherResources; sourceTree = "<group>"; };
+		A6A29CE01CA5A7FD00B37598 /* ASLInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ASLInfo.plist; sourceTree = "<group>"; };
+		A6A29CE11CA5A7FD00B37598 /* ASLDictionary.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ASLDictionary.xml; sourceTree = "<group>"; };
+		A6A29CE21CA5A7FD00B37598 /* ASLDictionary.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = ASLDictionary.css; sourceTree = "<group>"; };
+		A6A29CE31CA5A7FD00B37598 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		A6EDE5B01CD5554F004918A4 /* ASLXMLGenerator.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ASLXMLGenerator.py; sourceTree = "<group>"; };
+		A6EDE5B11CD55A72004918A4 /* ASLMacGenerator.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ASLMacGenerator.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		A6A29CD81CA5A76100B37598 = {
+			isa = PBXGroup;
+			children = (
+				A6EDE5B01CD5554F004918A4 /* ASLXMLGenerator.py */,
+				A6EDE5B11CD55A72004918A4 /* ASLMacGenerator.py */,
+				A6A29CDF1CA5A7FD00B37598 /* OtherResources */,
+				A6A29CE01CA5A7FD00B37598 /* ASLInfo.plist */,
+				A6A29CE11CA5A7FD00B37598 /* ASLDictionary.xml */,
+				A6A29CE21CA5A7FD00B37598 /* ASLDictionary.css */,
+				A6A29CE31CA5A7FD00B37598 /* Makefile */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		A6A29CD91CA5A76100B37598 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+			};
+			buildConfigurationList = A6A29CDC1CA5A76100B37598 /* Build configuration list for PBXProject "ASL Dictionary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A6A29CD81CA5A76100B37598;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		A6A29CDD1CA5A76100B37598 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		A6A29CDE1CA5A76100B37598 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A6A29CDC1CA5A76100B37598 /* Build configuration list for PBXProject "ASL Dictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A29CDD1CA5A76100B37598 /* Debug */,
+				A6A29CDE1CA5A76100B37598 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A6A29CD91CA5A76100B37598 /* Project object */;
+}
