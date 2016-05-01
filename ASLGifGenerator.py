@@ -10,6 +10,11 @@ import ast
 import xml.dom.minidom
 # Making GIFs like I'm not an internet n00b
 import subprocess
+# Making GIFs like I'm not a video editing n00b
+from moviepy.editor import *
+# ... but who am I fooling, I'm a total n00b.
+# To check if files exist
+import os.path
 
 """
 Here's an example of what we get from a call to the website:
@@ -24,11 +29,21 @@ def main():
 
 def createGif(url, title):
     title = title.replace(',', '-')
-    # Creates the gif and uploads it to imgur
-    imgur = subprocess.check_output('wgif ' + url + ' ' + title + '.gif' + ' --upload')
-    # Voodoo magic to get the url of the gif
-    # ... god I hope this works...
-    return imgur.rsplit(' ', 1)[1]
+    gif_title = './OtherResources/Videos/' + title + '.gif'
+    if os.path.isfile(gif_title):
+        return gif_title
+    # Use youtube-dl to download the video as a tmp mp4
+    # Not in the mood to fill up Karthik's computer with
+    # sign language videos and cause memory issues for dayz
+    try:
+        video = subprocess.check_output('youtube-dl ' + url + ' -u vballkihc53@gmail.com -p oqi59w38h59o34qh -o' + ' tmp.mp4', shell=True)
+        # Moviepy!
+        clip = VideoFileClip("tmp.mp4").subclip(0.5, -0.25)
+        clip.write_gif(gif_title, fps=10, fuzz=50)
+        subprocess.call('rm tmp.mp4', shell=True)
+    except:
+        return ""
+    return gif_title
 
 def buildXML():
     # Namespace stuff
@@ -37,8 +52,6 @@ def buildXML():
     ET.register_namespace("d", "http://www.apple.com/DTDs/DictionaryService-1.0.rng")
     # I'm sorry, that was inappropriate.
     # TODO: Make the namespaces actully work/automatically tag things
-    
-
     
     # Start that doc
     root = ET.Element('d:dictionary', {'xmlns':'http://www.w3.org/1999/xhtml', 'xmlns:d':'http://www.apple.com/DTDs/DictionaryService-1.0.rng'})
@@ -65,25 +78,31 @@ def buildXML():
     """
     
     # Iterate through each dict/list
+    count = 0.0 # For counting!
+    total = len(dict_list)
+    print("We have " + str(total) + " entries.")
     for attr in dict_list:
         entry = ET.SubElement(root, 'd:entry', {'id':attr['_id'], 'd:title':attr['title']})
         # TODO: Prioritizing videos
         i = 1
         for keyword in attr['keywords']:
             index = ET.SubElement(entry, 'd:index', {'d:value':keyword})
-        span = ET.SubElement(entry, 'span', {'class':'video'}) # This span is totally unnecessary
-        # Gif it up
-        """
-        imgur = createGif('https://www.youtube.com/watch?v=' + attr['id'], attr['title'])
-        img = ET.SubElement(span, 'img', {'src':imgur, 'alt':'GIF version of video available at ' + 'https://www.youtube.com/embed/' + attr['id']})
-        """
-        img = ET.SubElement(span, 'img', {'src':'https://media.giphy.com/media/sIIhZliB2McAo/giphy-facebook_s.jpg', 'alt':'GIF version of video available at ' + 'https://www.youtube.com/embed/' + attr['id']})
+        if attr['privacyStatus'] == 'public':
+            span = ET.SubElement(entry, 'span', {'class':'video'})
+            # This span is totally unnecessary
+            # Gif it up
+            gif = createGif(attr['id'], attr['title'])
+            if gif: # Check if we could get the video
+                img = ET.SubElement(span, 'img', {'src':gif, 'alt':'GIF version of video available at ' + 'https://www.youtube.com/embed/' + attr['id']})
         if attr['related_words']:
             p = ET.SubElement(entry,'p')
             p.text = attr['related_words']
+        if count % 50 == 0:
+            print(str(int((count/total)*100)) + "% of the way there!")
+        count = count + 1
     
     tree = ET.ElementTree(root)
-    tree.write("ASLDictionary.xml", encoding="UTF-8")
+    tree.write("ASLTestDictionary.xml", encoding="UTF-8")
     x = xml.dom.minidom.parseString(ET.tostring(root))
     pretty_xml_as_string = x.toprettyxml()
     print(pretty_xml_as_string[0:1000])
